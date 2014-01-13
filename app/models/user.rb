@@ -20,6 +20,9 @@ class User < ActiveRecord::Base
   #在保存之前将字符转成小写
   before_save { |user| user.email = email.downcase }
 
+  #生成唯一状态标识,记录用户登录状态
+  before_save :create_remember_token
+
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   #邮箱存在性验证, 邮箱格式正则验证, 唯一性验证并且不区分大小写
@@ -31,4 +34,11 @@ class User < ActiveRecord::Base
   validates :password, presence: true, length: { minimum: 6 }
 
   validates :password_confirmation, presence: true
+
+
+  private
+    def create_remember_token
+      self.remember_token = SecureRandom.urlsafe_base64
+    end
+
 end
