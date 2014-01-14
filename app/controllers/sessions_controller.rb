@@ -13,7 +13,8 @@ class SessionsController < ApplicationController
 
       sign_in user
       flash[:success] = "Welcome to the Sample App!"
-      redirect_to user
+      #跳转到登录之前想访问的地址
+      redirect_back_or user
     else
       # Create an error message and re-render the signin form.
       #flash中的信息是在一个请求的生命周期内持续存在的,

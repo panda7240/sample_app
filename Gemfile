@@ -59,4 +59,13 @@ end
 
 
 gem 'bootstrap-sass', '2.0.4'
+#安全插件
 gem 'bcrypt-ruby', '3.0.1'
+
+#伪造数据插件
+gem 'faker', '1.0.1'
+
+#分页插件
+gem 'will_paginate', '3.0.3'
+#使分页插件拥有bootstrap样式
+gem 'bootstrap-will_paginate', '0.0.6'

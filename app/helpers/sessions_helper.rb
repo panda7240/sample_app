@@ -27,10 +27,26 @@ module SessionsHelper
     @current_user ||= User.find_by_remember_token(cookies[:remember_token])
   end
 
+  def current_user?(user)
+    user == current_user
+  end
+
 
   def sign_out
     self.current_user = nil
     cookies[:remember_token] = nil
+  end
+
+
+  def redirect_back_or(default)
+    #如果session[:return_to]地址为空则跳转到默认页面
+    redirect_to(session[:return_to] || default)
+    session.delete(:return_to)
+  end
+
+  #存储登录之前想访问的地址
+  def store_location
+    session[:return_to] = request.fullpath
   end
 
 end
