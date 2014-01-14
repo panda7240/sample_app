@@ -5,6 +5,8 @@ SampleApp::Application.routes.draw do
   #对动作种类做了限制
   resources :sessions, only: [:new, :create, :destroy]
 
+  resources :microposts, only: [:create, :destroy]
+
   match "/signup",  to: "users#new"
 
   match "/signin", to: "sessions#new"

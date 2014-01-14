@@ -14,6 +14,9 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
+  #管理微博, 级联删除
+  has_many :microposts, dependent: :destroy
+
   #存在性验证, 长度验证
   validates :name, presence: true, length: { maximum: 50 }
 
@@ -35,6 +38,11 @@ class User < ActiveRecord::Base
 
   validates :password_confirmation, presence: true
 
+
+  def feed
+    # This is preliminary. See "Following users" for the full implementation.
+    Micropost.where("user_id = ?", id)
+  end
 
   private
     def create_remember_token

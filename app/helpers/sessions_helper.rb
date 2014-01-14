@@ -49,4 +49,18 @@ module SessionsHelper
     session[:return_to] = request.fullpath
   end
 
+
+
+  def signed_in_user
+    #等同
+    #flash[:notice] = "Please sign in."
+    #redirect_to signin_path
+    #flash[:error]也可以用这样的简便形式,但是flash[:success]却不行
+    unless signed_in?
+      #存储想要登录后跳转的地址
+      store_location
+      redirect_to signin_url, notice: "Please sign in."
+    end
+  end
+
 end
