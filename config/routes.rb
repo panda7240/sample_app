@@ -1,11 +1,17 @@
 SampleApp::Application.routes.draw do
 
-  resources :users
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
 
   #对动作种类做了限制
   resources :sessions, only: [:new, :create, :destroy]
 
   resources :microposts, only: [:create, :destroy]
+
+  resources :relationships, only: [:create, :destroy]
 
   match "/signup",  to: "users#new"
 
